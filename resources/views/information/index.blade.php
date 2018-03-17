@@ -23,24 +23,18 @@
       text-align: center;
       font-size: 120%;
     }
-
     .ui-datepicker .ui-datepicker-title select {
       color: #000;
     }
-
     body{
       /* The image used */
       background: url("/images/table_background.jpg");
-
       /* Full height */
       height: 100%;
-
-
     }
     table{
       background-color: white;
       font-size: 90%;
-
     }
   </style>
 </head>
@@ -130,7 +124,12 @@
                 <td>  {{$info['totalPrice']}}</td>
 
                 <td>
-                  <a href="{{route('amount.delete', $info['id'])}}">  <button type="submit" class="btn btn-danger"> <i class="fa fa-eraser"></i> Delete</button></a>
+                  <!-- <a href="{{route('amount.delete', $info['id'])}}">  <but€ton type="submit" class="btn btn-danger"> <i class="fa fa-eraser"></i> Delete</button></a> -->
+
+                    <button type="submit" class="btn btn-danger"   data-toggle ="modal"  data-target="#deleteModal">
+                      <i class="fa fa-eraser"></i> Delete
+                    </button>
+
                 </td>
             </tr>
           @endforeach
@@ -142,6 +141,36 @@
       <br>
     </table>
 
+
+    <!-- Delete Modal starts-->
+    <div class="modal modal-danger fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title text-center" id="myModalLabel">Delete Confirmation</h3>
+          </div>
+
+          <form action="{{route('amount.delete')}}" method="post">
+
+          		{{csrf_field()}}
+    	      <div class="modal-body">
+    				<p class="text-center">
+    					<b>Are you sure you want to delete this?<br>This can't be undone</b>
+    				</p>
+    	      		<input type="hidden" name="info_id"  value="{{$info['id']}}">
+
+    	      </div>
+    	      <div class="modal-footer">
+    	        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+    	        <button type="submit" class="btn btn-danger"><i class="fa fa-check"></i> Delete</button>
+    	      </div>
+          </form>
+        </div>
+      </div>
+    </div>
+      <!-- Delete Modal ends-->
+
   </div>
 
 
@@ -152,6 +181,15 @@
   $(document).ready(function () {
     //date format arrange according to database
       $("#datepicker, #datepicker2").datepicker({ dateFormat: "yy-mm-dd" });
-
   });
+
+//   deleteModal
+//   $('#deleteModal').on('show.bs.modal', function (event) {
+//      var button = $(event.relatedTarget)
+//      var cat_id = button.data('catid')
+//      var modal = $(this)
+//     var a=  modal.find('.modal-body #cat_id').val(cat_id);
+//     alert(a);
+// })
+
 </script>

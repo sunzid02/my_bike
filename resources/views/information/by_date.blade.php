@@ -49,7 +49,7 @@
 
 
 
-<div class="container">
+<div class="container" >
 
 
 
@@ -138,7 +138,10 @@
                 <td>  {{$info['totalPrice']}}</td>
 
                 <td>
-                  <a href="{{route('amount.delete', $info['id'])}}">  <button type="submit" class="btn btn-danger"> <i class="fa fa-eraser"></i> Delete</button></a>
+                  <!-- <a href="{{route('amount.delete', $info['id'])}}">  <button type="submit" class="btn btn-danger"> <i class="fa fa-eraser"></i> Delete</button></a> -->
+                  <button type="submit" class="btn btn-danger"   data-toggle ="modal"  data-target="#deleteModal">
+                    <i class="fa fa-eraser"></i> Delete
+                  </button>
                 </td>
             </tr>
           @endforeach
@@ -149,6 +152,38 @@
       </tbody>
       <br>
     </table>
+
+    <!-- Delete Modal starts-->
+    <div class="modal modal-danger fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title text-center" id="myModalLabel">Delete Confirmation</h3>
+          </div>
+
+          <form action="{{route('amount.delete')}}" method="post">
+
+          		{{csrf_field()}}
+    	      <div class="modal-body">
+    				<p class="text-center">
+    					<b>Are you sure you want to delete this?<br>This can't be undone</b>
+    				</p>
+    	      		<input type="hidden" name="info_id"  value="{{$info['id']}}">
+
+    	      </div>
+    	      <div class="modal-footer">
+    	        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+    	        <button type="submit" class="btn btn-danger"><i class="fa fa-check"></i> Delete</button>
+    	      </div>
+          </form>
+        </div>
+      </div>
+    </div>
+      <!-- Delete Modal ends-->
+
+  </div>
+
 
   </div>
 

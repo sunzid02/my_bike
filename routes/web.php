@@ -21,7 +21,7 @@ Route::post('/amount', 'AmountController@insert')->name('amount.insert');
 Route::get('/info_all', 'AmountController@info')->name('amount.info');
 
 // delete
-Route::get('/info_delete/{id}', 'AmountController@delete')->name('amount.delete');
+Route::post('/info_delete', 'AmountController@delete')->name('amount.delete');
 
 //search by date information
 Route::post('/by_date', 'AmountController@searchByDate')->name('amount.searchByDate');

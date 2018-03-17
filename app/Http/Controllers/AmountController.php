@@ -74,19 +74,36 @@ class AmountController extends Controller
 
 
     //delete
-    public function delete($id)
+    public function delete(Request $req)
     {
       # receiving id from route
 
+      // $id = $req->category_id;
+      //
+      // $informationOfSelectedId = DB::table('cost_infos')->where('id',$id)->first();
+      //
+      // //for object we use arrow sign ->
+      // $deleteId = $informationOfSelectedId->id;
+      //
+      // //executing delete query
+      // DB::table('cost_infos')->delete($deleteId);
+      // return redirect()->route('amount.info');
 
-      $informationOfSelectedId = DB::table('cost_infos')->where('id',$id)->first();
+      //delete from modal
+      $informationOfSelectedId = DB::table('cost_infos')->where('id',$req->info_id)->first();
 
-      //for object we use arrow sign ->
       $deleteId = $informationOfSelectedId->id;
+      // echo "<pre>";
+      // print_r($informationOfSelectedId);
+      // echo "</pre>";
+      // die();
 
-      //executing delete query
+
+      // //executing delete query
       DB::table('cost_infos')->delete($deleteId);
-      return redirect()->route('amount.info');
+
+      return back();
+
 
     }
 
@@ -98,7 +115,7 @@ class AmountController extends Controller
       // print_r($data);
       $infoByDate = Cost_info::whereBetween('date', $data)->get();
 
-      
+
 
       return view('information.by_date')->withInfoByDate($infoByDate);
 
