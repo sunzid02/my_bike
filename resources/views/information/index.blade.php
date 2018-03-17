@@ -53,7 +53,7 @@
     <table class="table" bgcolor="cyan" >
       <tbody>
         <!-- search by date -->
-        <form class="" action="{{ route('amount.searchByDate') }}" method="post">
+        <form class="" action="{{ route('amount.searchByDate') }}" method="get">
           {{csrf_field()}}
           <tr>
             <td>
@@ -65,7 +65,7 @@
               <input id="datepicker2" class="form-control"  placeholder="yy-mm-dd" name="toDate"  required>
             </td>
             <td style="padding-top:32px">
-              <button type="submit" formmethod="post" class="btn btn-primary"><i class="fa fa-search "></i> Search</button>
+              <button type="submit"  class="btn btn-primary"><i class="fa fa-search "></i> Search</button>
             </td>
           </tr>
 

@@ -115,12 +115,47 @@ class AmountController extends Controller
       // print_r($data);
       $infoByDate = Cost_info::whereBetween('date', $data)->get();
 
+      if ( $infoByDate->count() > 0 )
+      {
+        # code...
+        return view('information.by_date')->withInfoByDate($infoByDate);
 
+      }
+      else
+      {
+        // $infoByDate = null;
+        // var_dump($infoByDate);
+        $date= explode('-',$req->fromDate);
+        //
+        // $fromDateYear = $date[0];
+        // $fromDateMonth = $date[1];
+        // $fromDateDay = $date[2];
 
-      return view('information.by_date')->withInfoByDate($infoByDate);
+        $now  = array('day' => $date[2] ,
+                      'month' => $date[1],
+                     'year' => $date[0]
+                   );
 
-      // echo "<pre>";
-      // print_r($articles);
-      // echo "</pre>";
+        $date2= explode('-',$req->toDate);
+        //
+        // $fromDateYear = $date[0];
+        // $fromDateMonth = $date[1];
+        // $fromDateDay = $date[2];
+
+        $now2  = array('day' => $date2[2] ,
+                      'month' => $date2[1],
+                     'year' => $date2[0]
+                   );
+
+        $fromDate = $now['day']."/". $now['month'] . "/". $now['year'];
+
+        $toDate = $now2['day']."/". $now2['month'] . "/". $now2['year'];
+
+        return view('information.no_data_by_date')
+              ->withFromDate($fromDate)
+              ->withtoDate($toDate);
+
+      }
+
     }
 }

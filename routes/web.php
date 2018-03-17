@@ -25,3 +25,4 @@ Route::post('/info_delete', 'AmountController@delete')->name('amount.delete');
 
 //search by date information
 Route::post('/by_date', 'AmountController@searchByDate')->name('amount.searchByDate');
+Route::get('/by_date', 'AmountController@searchByDate')->name('amount.searchByDate');
